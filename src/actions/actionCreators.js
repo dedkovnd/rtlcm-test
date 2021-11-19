@@ -1,8 +1,7 @@
 import {
   FETCH_POSTS,
   SEARCH_POSTS,
-  FILTER_POSTS,
-  RETURN_POSTS,
+  FILTER_POSTS
 } from "../actions/actionTypes";
 
 export function searchPost(input) {
@@ -11,10 +10,6 @@ export function searchPost(input) {
 
 export function filterPosts(filter) {
   return { type: FILTER_POSTS, payload: filter };
-}
-
-export function returnPosts() {
-  return {type: RETURN_POSTS}
 }
 
 export function fetchPosts() {

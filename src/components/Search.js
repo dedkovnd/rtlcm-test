@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchPost } from "../actions/actionCreators";
-import { returnPosts } from "../actions/actionCreators";
+import { fetchPosts } from "../actions/actionCreators";
 
 export function Search() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export function Search() {
     const { value } = evt.target;
     dispatch(searchPost(value));
     if (value.length === 0) {
-      dispatch(returnPosts());
+      dispatch(fetchPosts());
     }
   };
   return (

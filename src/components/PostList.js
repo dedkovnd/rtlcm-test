@@ -4,7 +4,9 @@ import { fetchPosts, filterPosts } from "../actions/actionCreators";
 
 export function PostList() {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.filterPosts);
+  const posts = useSelector((state) => state.posts.fetchPosts);
+  const filterposts = useSelector((state) => state.posts.filterPosts);
+  const currentKey = useSelector((state)=> state.posts.key);
   const [sort, setSort] = useState(false);
 
   useEffect(() => {
@@ -13,18 +15,29 @@ export function PostList() {
 
   const clickHandler = (key) => {
     dispatch(filterPosts(key));
-    setSort(true)
+    if (currentKey == key) {
+      setSort(false);
+      dispatch(filterPosts(""))
+    } else {
+      setSort(true)
+    }
   };
 
   return (
     <div className="posts">
       <ul className="posts-nav">
-        <li className="nav-item">All</li>
+        <li className="nav-item" onClick={() => setSort(false)}>
+          All
+        </li>
         <li className="nav-item" onClick={() => clickHandler("title")}>
           Title
         </li>
-        <li className="nav-item">User</li>
-        <li className="nav-item">Text</li>
+        <li className="nav-item" onClick={() => clickHandler("userId")}>
+          User
+        </li>
+        <li className="nav-item" onClick={() => clickHandler("body")}>
+          Text
+        </li>
       </ul>
       {!sort && (
         <ul>
@@ -37,13 +50,15 @@ export function PostList() {
           ))}
         </ul>
       )}
-      {sort && <ul>
-        {posts.map((post, i) => (
-          <li className="post-filter" key={i}>
-            <span>{post}</span>
-          </li>
-        ))}
-      </ul>}
+      {sort && (
+        <ul>
+          {filterposts.map((post, i) => (
+            <li className="post-filter" key={i}>
+              <span>{post}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
