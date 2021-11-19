@@ -1,8 +1,8 @@
-import { fetchPosts } from "../actions/actionCreators";
 import {
   FETCH_POSTS,
   SEARCH_POSTS,
   RETURN_POSTS,
+  FILTER_POSTS
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -30,8 +30,17 @@ const postListReducer = (state = initialState, action) => {
         return initialState;
       }
     }
+    case FILTER_POSTS: {
+      const key = action.payload;
+      const filterData = state.filterPosts.map((e) => e[key]);
+      return {
+        ...state,
+        filterPosts: filterData
+      };
+    }
     case RETURN_POSTS: {
-        return { ...state, filterPosts: [...state.fetchPosts]}
+      const copy = state.fetchPosts
+      return { ...state, filterPosts: copy}
     }
     default:
       return state;

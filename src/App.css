@@ -40,6 +40,12 @@ li {
   margin-bottom: 1em;
 }
 
+.post-filter {
+  border: solid 1px #9466ff;
+  padding: 1em 0.5em 1em;
+  margin-bottom: 1em;
+}
+
 .post-user {
   display: inline-block;
   height: 2em;
