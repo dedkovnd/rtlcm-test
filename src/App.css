@@ -34,6 +34,10 @@ li {
   justify-content: space-between;
 }
 
+.nav-item {
+  cursor: pointer;
+}
+
 .post {
   border: solid 1px #9466ff;
   padding: 0px 0.5em 1em;
